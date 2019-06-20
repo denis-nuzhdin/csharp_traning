@@ -13,6 +13,7 @@ namespace WebAddressbookTests
     {
         public ContactHelper(ApplicationManager manager) : base(manager)
             {
+
             }
 
         public ContactHelper Create(ContactData contact)
@@ -21,6 +22,36 @@ namespace WebAddressbookTests
             FillContact(contact);
             SubmitContact();
             manager.Navigator.OpenHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(int v, ContactData newData)
+        {
+            manager.Navigator.OpenHomePage();
+            //SelectContact(v);
+            InitContactModification(v);
+            FillContact(newData);
+            SubmitContactModification();
+            manager.Navigator.OpenHomePage();
+
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.XPath("//input[@value='Update']")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             return this;
         }
 
