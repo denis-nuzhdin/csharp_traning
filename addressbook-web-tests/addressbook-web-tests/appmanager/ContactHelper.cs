@@ -45,7 +45,6 @@ namespace WebAddressbookTests
             SelectContact(v);
             DeleteContactFromList();
             driver.SwitchTo().Alert().Accept();
-            //DeleteContact();
             manager.Navigator.OpenHomePage();
             return this;
         }
@@ -88,12 +87,8 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContact(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.FistName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
+            Type(By.Name("firstname"), contact.FistName);
+            Type(By.Name("lastname"), contact.LastName);
             return this;
         }
 
