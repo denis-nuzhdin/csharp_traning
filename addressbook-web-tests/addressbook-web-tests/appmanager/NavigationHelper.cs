@@ -15,6 +15,10 @@ namespace WebAddressbookTests
 
         public NavigationHelper(ApplicationManager manager, string baseURL) : base(manager)
         {
+            if (driver.Url == baseURL)
+            {
+                return;
+            }
             this.baseURL = baseURL;
         }
 
@@ -25,6 +29,11 @@ namespace WebAddressbookTests
 
         public void OpenGroupPage()
         {
+            if (driver.Url == baseURL + "groups.php"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
         }
 

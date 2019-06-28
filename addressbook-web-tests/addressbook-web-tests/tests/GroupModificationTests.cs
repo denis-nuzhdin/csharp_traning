@@ -13,11 +13,21 @@ namespace WebAddressbookTests
         [Test]
         public void GroupModificationTest()
         {
+            GroupData oldData = new GroupData("имя группы для переименования");
+            oldData.Header = "хедер переименования";
+            oldData.Footer = "футер переименования";
+
             GroupData newData = new GroupData("имя группы");
             newData.Header = "хедер";
             newData.Footer = "футер";
- 
-            app.Group.Modify(4, newData);
+
+
+            if (app.Group.IsCheckedElement() == false)
+            {
+                app.Group.Create(oldData);
+            }
+
+            app.Group.Modify(1,oldData, newData);
 
         }
     }

@@ -27,10 +27,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper Modify(int v, ContactData newData)
+        public ContactHelper Modify(int v, ContactData oldData, ContactData newData)
         {
-            manager.Navigator.OpenHomePage();
-            //SelectContact(v);
+            //manager.Navigator.OpenHomePage();
             InitContactModification(v);
             FillContact(newData);
             SubmitContactModification();
@@ -39,9 +38,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper Remove(int v)
+        public ContactHelper Remove(int v, ContactData oldData)
         {
-            manager.Navigator.OpenHomePage();
+            //manager.Navigator.OpenHomePage();
             SelectContact(v);
             DeleteContactFromList();
             driver.SwitchTo().Alert().Accept();
@@ -75,7 +74,8 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr["+index+"]/td/input")).Click();
+            //driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr["+index+"]/td/input")).Click();
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + index + "]//input[@name='selected[]']")).Click();
             return this;
         }
 
@@ -91,6 +91,15 @@ namespace WebAddressbookTests
             Type(By.Name("lastname"), contact.LastName);
             return this;
         }
+
+        public bool IsCheckedContact()
+        {
+            manager.Navigator.OpenHomePage();
+            return IsElementPresent(By.XPath("//table[@id='maintable']/tbody//td/input"));
+
+
+        }
+
 
 
     }

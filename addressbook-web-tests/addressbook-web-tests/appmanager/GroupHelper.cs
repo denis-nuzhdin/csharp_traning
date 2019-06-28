@@ -27,9 +27,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(int v, GroupData oldData, GroupData newData)
         {
-            manager.Navigator.OpenGroupPage();
+
+            //manager.Navigator.OpenGroupPage();
             SelectGroup(v);
             InitGroupModification();
             FillGroup(newData);
@@ -38,9 +39,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Remove(int v)
+        public GroupHelper Remove(int v, GroupData oldData)
         {
-            manager.Navigator.OpenGroupPage();
+            //manager.Navigator.OpenGroupPage();
             SelectGroup(v);
             RemoveGroup();
             manager.Navigator.OpenGroupPage();
@@ -93,7 +94,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
-
+        public bool IsCheckedElement()
+        {
+            manager.Navigator.OpenGroupPage();
+            return IsElementPresent(By.XPath("//*[@id='content']/form/span/input"));
+            
+        }
+                
     }
 }

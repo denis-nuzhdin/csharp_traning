@@ -13,7 +13,17 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            app.Group.Remove(4);
+            GroupData oldData = new GroupData("имя группы для удаления");
+            oldData.Header = "хедер удаления";
+            oldData.Footer = "футер удаления";
+
+
+            if (app.Group.IsCheckedElement() == false)
+            {
+                app.Group.Create(oldData);
+            }
+
+            app.Group.Remove(1, oldData);
             
         }
     }
