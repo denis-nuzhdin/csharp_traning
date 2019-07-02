@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using System.Collections.Generic;
+
 
 
 namespace WebAddressbookTests
@@ -27,7 +29,16 @@ namespace WebAddressbookTests
                 app.Group.Create(oldData);
             }
 
-            app.Group.Modify(1,oldData, newData);
+            List<GroupData> oldGroups = app.Group.GetGroupList();
+
+            app.Group.Modify(0,oldData, newData);
+
+            List<GroupData> newGroups = app.Group.GetGroupList();
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+
 
         }
     }
