@@ -55,19 +55,20 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return FistName == other.FistName;
+            return FIO == other.FIO;
             //return LastName == other.LastName;
         }
 
         public override int GetHashCode()
         {
-            return FistName.GetHashCode();
+            return FIO.GetHashCode();
             //return LastName.GetHashCode();
         }
 
         public override string ToString()
         {
-            return "fio=" + LastName + FistName;
+            return FIO;
+            //return "fio=" + LastName + FistName;
            //return "last_name=" + LastName;
         }
 
@@ -77,12 +78,28 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return FistName.CompareTo(other.FistName);
+            return FIO.CompareTo(other.FIO);
            //return LastName.CompareTo(other.LastName);
         }
 
         /// //////////////////////////////////
 
+        public string FIO
+        {
+            get
+            {
+                string fio;
+                fio = first_name + last_name;
+                return fio;
+            }
+
+            set
+            {
+                string fio;
+                fio = first_name + last_name;
+                fio = value;
+            }
+        }
 
         public string FistName
         {
