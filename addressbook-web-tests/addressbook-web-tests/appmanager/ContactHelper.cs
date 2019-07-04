@@ -33,7 +33,9 @@ namespace WebAddressbookTests
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.OpenHomePage();
             ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            
+
+            string lastName;
+            string firstName;
 
             foreach (IWebElement element in elements)
             {
@@ -41,10 +43,7 @@ namespace WebAddressbookTests
                 //ICollection<IWebElement> cells_first = new List<IWebElement>(element.FindElements(By.XPath("//*[@id='maintable']//td[3]")));
 
                 List<IWebElement> cells = new List<IWebElement>(element.FindElements(By.TagName("td")));
-
-                string lastName;
-                string firstName;
-
+                               
                 lastName = cells[1].Text;
                 firstName = cells[2].Text;
                 
