@@ -30,11 +30,16 @@ namespace WebAddressbookTests
             app.Group.Remove(0, oldData);
 
             List<GroupData> newGroups = app.Group.GetGroupList();
-
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
     }
 }
