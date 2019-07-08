@@ -54,27 +54,65 @@ namespace WebAddressbookTests
             //return "last_name=" + LastName;
         }
 
+        //public int CompareTo(ContactData other)
+        //{
+        //    if (Object.ReferenceEquals(other, null))
+        //    {
+        //        return 1;
+        //    }
+
+        //    //if (Object.ReferenceEquals(this, other))
+        //    //{
+        //    //    return 1;
+        //    //}
+        //    //return LastName.CompareTo(other.LastName);
+
+        //    return LastName.CompareTo(other.LastName) + FistName.CompareTo(other.FistName);
+        //    //return FIO.CompareTo(other.FIO);
+        //    //return LastName.CompareTo(other.LastName);
+        //}
+
+        /// //////////////////////////////////
+
+        //public int CompareTo(ContactData other)
+        //{
+        //    if (Object.ReferenceEquals(other, null))
+        //    {
+        //        return 1;
+        //    }
+        //    if (LastName.CompareTo(other.LastName) == 1)
+        //    {
+        //        return FistName.CompareTo(other.FistName);
+        //    }
+        //    else
+        //    {
+        //        return LastName.CompareTo(other.LastName);
+        //    }
+
+        //}
+
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
                 return 1;
             }
+            if (Object.ReferenceEquals(other.LastName,this.LastName))
+            {
+                Object.ReferenceEquals(other.FistName, this.FistName);
+                return 0;
+            }
+            else
+            {
+                return LastName.CompareTo(other.LastName);
+            }
 
-            //if (Object.ReferenceEquals(this, other))
-            //{
-            //    return 1;
-            //}
-            //return LastName.CompareTo(other.LastName);
-            
-            return LastName.CompareTo(other.LastName) + FistName.CompareTo(other.FistName);
-            //return FIO.CompareTo(other.FIO);
-            //return LastName.CompareTo(other.LastName);
         }
 
-        /// //////////////////////////////////
 
- 
+
+
         public string FistName { get; set;}
 
         public string MiddleName { get; set; }
