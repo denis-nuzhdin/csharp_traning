@@ -9,7 +9,20 @@ namespace WebAddressbookTests
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
+        private string address;
         private string allEmails;
+        private string detailedInformation;
+        private string allFIO;
+        private string nickname;
+        private string allPhonesView;
+        private string title;
+        private string company;
+        private string homepage;
+        private string homePageView;
+        private string stringRN = "\r\n";
+        private string allMailsView;
+        private string bYear;
+        private int fullBYears;
 
         public ContactData(string first_name ,string last_name)
         {
@@ -18,8 +31,12 @@ namespace WebAddressbookTests
 
         }
 
+        public ContactData()
+        {
 
-          // ////////////////////////////
+        }
+
+        // ////////////////////////////
 
 
         public bool Equals(ContactData other)
@@ -48,50 +65,15 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return LastName + FistName;
+
+            return "lastname = "+LastName+"\nfirstname = " + FistName+ "\nmiddlename = " + MiddleName;
+
             //return FIO;
             //return "fio=" + LastName + FistName;
             //return "last_name=" + LastName;
         }
 
-        //public int CompareTo(ContactData other)
-        //{
-        //    if (Object.ReferenceEquals(other, null))
-        //    {
-        //        return 1;
-        //    }
-
-        //    //if (Object.ReferenceEquals(this, other))
-        //    //{
-        //    //    return 1;
-        //    //}
-        //    //return LastName.CompareTo(other.LastName);
-
-        //    return LastName.CompareTo(other.LastName) + FistName.CompareTo(other.FistName);
-        //    //return FIO.CompareTo(other.FIO);
-        //    //return LastName.CompareTo(other.LastName);
-        //}
-
-        /// //////////////////////////////////
-
-        //public int CompareTo(ContactData other)
-        //{
-        //    if (Object.ReferenceEquals(other, null))
-        //    {
-        //        return 1;
-        //    }
-        //    if (LastName.CompareTo(other.LastName) == 1)
-        //    {
-        //        return FistName.CompareTo(other.FistName);
-        //    }
-        //    else
-        //    {
-        //        return LastName.CompareTo(other.LastName);
-        //    }
-
-        //}
-
-
+      
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -111,23 +93,96 @@ namespace WebAddressbookTests
         }
 
 
-
-
         public string FistName { get; set;}
 
         public string MiddleName { get; set; }
 
         public string LastName { get; set; }
 
-        public string Address { get; set; }
+        public string Address
+        {
+            get
+            {
+                if (address != null)
+                {
+                    return address;
+                }
+                else
+                {
+                    return fromatRNforString(address) + stringRN;
+                }
+            }
 
-        public string Nickname { get; set; }
+            set
+
+            {
+                address = value;
+            }
+                
+        }
+
+        //public string Nickname { get; set; }
+        public string Nickname
+        {
+            get
+            {
+                if (nickname != null || nickname=="")
+                {
+                    return nickname + stringRN;
+                }
+                else
+                {
+                    return nickname + stringRN;
+                }
+            }
+ 
+
+            set
+            {
+                nickname = value;
+            }
+        }
+
+
 
         public string Photo { get; set; }
 
-        public string Title { get; set; }
+        public string Title
+        {
+            get
+            {
+                if (title != null || title == "")
+                {
+                    return fromatRNforString(title);
+                }
+                else return fromatRNforString(title);
 
-        public string Company { get; set; }
+            }
+
+            set
+            {
+                title = value;
+            }
+                
+        }
+
+        public string Company
+        {
+            get
+            {
+                if (company != null || company == "")
+                {
+                    return fromatRNforString(company);
+                }
+                else return fromatRNforString(company);
+
+            }
+
+            set
+            {
+                company = value;
+            }
+        }
 
         public string PhoneHome { get; set; }
 
@@ -182,7 +237,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CheckEmails(Email1) + "\r\n" + CheckEmails(Email2) +"\r\n" + CheckEmails(Email3)).Trim();
+                    return (CheckEmails(Email1) + CheckEmails(Email2) +CheckEmails(Email3)).Trim();
                 }
 
             }
@@ -199,14 +254,83 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return email;
+            return email + "\r\n";
         }
 
-        public string Homepage { get; set; }
+        public string Homepage
+        {
+            get
+            {
+                if (homepage != null || homepage == "")
+                {
+                    return homepage;
+                }
+                else
+                {
+                    return homepage;
+                }
+            }
+
+            set
+            {
+                homepage = value;
+            }
+        }
 
         public string Birthday { get; set; }
+        public string Bday { get; set; }
+        public string Bmonth { get; set; }
+        public string Byear
+        { get
+            {
+                if (bYear != null)
+                {
+                    return bYear;
+                }
+                else
+                {
+                    return bYear;
+                }
+            }
+
+            set 
+            {
+                bYear = value;
+            }
+        }
 
         public string Anniversary { get; set; }
+
+        //public string FullBYear
+        //{
+        //    get
+        //    {
+        //        int currentYear;
+        //        currentYear = Convert.ToInt32(DateTime.Now.Year);
+              
+        //        if (Byear == null)
+        //        {
+        //            return "";
+        //        }
+        //        else
+        //        {
+        //           //return currentYear;
+        //            fullBYears = currentYear - Convert.ToInt32(bYear);
+        //            return fullBYears;
+        //        }
+
+        //    }
+
+        //    set
+        //    {
+        //        fullBYears = value;
+        //    }
+
+        //}
+
+        public string Aday { get; set; }
+        public string Amonth { get; set; }
+        public string Ayear { get; set; }
 
         public string Group { get; set; }
 
@@ -215,7 +339,137 @@ namespace WebAddressbookTests
         public string SecondaryHome { get; set; }
 
         public string SecondaryNotes { get; set; }
-    
+
+
+        public string DetailedInformation
+        {
+            get
+            {
+                if (detailedInformation != null)
+                {
+                    return detailedInformation;
+                }
+                else
+                {
+                    return (GetFIOFromView + Nickname + Title + Company + Address + GetPhonesFromView + 
+                        GetMailsFromView + GetHomepageFromView + fromatRNforString(Birthday) + fromatRNforString(Anniversary) +stringRN 
+                        + fromatRNforString(SecondaryAddress)+ stringRN + SecondaryNotes).Trim();
+
+                }
+            }
+
+            set
+            {
+                detailedInformation = value;
+            }
+        }
+
+
+        public string GetFIOFromView
+        {
+            get
+            {
+                if (allFIO != null)
+                {
+                    return allFIO;
+                }
+                else
+                {
+                    return FistName + " " + MiddleName + " " + LastName + stringRN;
+                }
+            }
+
+            set
+            {
+                allFIO = value;
+            }
+        }
+
+
+
+
+        string GetPhonesFromView
+        {
+            get
+            {
+                if (allPhonesView == null || allPhones =="")
+                {
+                    return "";
+                }
+                else
+                {
+                    return fromatRNforString("H: " + PhoneHome + stringRN + "M: " + 
+                        PhoneMobile + stringRN + "W: " + PhoneWork + stringRN + "F: "+PhoneFax) + stringRN;
+                }
+
+            }
+
+            set
+            {
+                allPhonesView = value;
+            }
+
+        }
+
+
+        string GetMailsFromView
+        {
+            get
+            {
+                if (allMailsView == null || allMailsView =="")
+                {
+                    return "";
+                }
+                else
+                {
+                    return fromatRNforString(Email1 + stringRN + Email2 + stringRN + Email3);
+                }
+
+            }
+
+            set
+            {
+                allPhonesView = value;
+            }
+
+        }
+
+
+
+        string GetHomepageFromView
+        {
+            get
+            {
+                if (homePageView == null || homePageView == "")
+                {
+                    return "";
+                }
+                else
+                {
+                    return fromatRNforString("Homepage:"+ stringRN + Homepage) + stringRN;
+                }
+
+            }
+
+            set
+            {
+                allPhonesView = value;
+            }
+
+        }
+
+
+        string fromatRNforString(string thisString)
+        {
+            if (thisString == null || thisString == "")
+            {
+                return "";
+            }
+            return thisString + "\r\n";
+        }
+
+
     }
- 
+
 }
+
