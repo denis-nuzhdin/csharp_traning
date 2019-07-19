@@ -73,17 +73,16 @@ namespace WebAddressbookTests
             //return "last_name=" + LastName;
         }
 
-      
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
                 return 1;
             }
-            if (Object.ReferenceEquals(other.LastName,this.LastName))
+            if (LastName.CompareTo(other.LastName) == 0)
             {
-                Object.ReferenceEquals(other.FistName, this.FistName);
-                return 0;
+                return FistName.CompareTo(other.FistName);
             }
             else
             {
