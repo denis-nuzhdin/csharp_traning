@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [Test]
         public void GroupRemovalTest()
@@ -25,12 +25,13 @@ namespace WebAddressbookTests
             }
 
 
-            List<GroupData> oldGroups = app.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData toBeRemoved = oldGroups[0];
 
-            app.Group.Remove(0, oldData);
+            app.Group.Remove(toBeRemoved);
 
             List<GroupData> newGroups = app.Group.GetGroupList();
-            GroupData toBeRemoved = oldGroups[0];
+            
             oldGroups.RemoveAt(0);
             oldGroups.Sort();
             newGroups.Sort();

@@ -17,7 +17,7 @@ namespace WebAddressbookTests
         {
 
         }
-                       
+
         public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.InitContactCreation();
@@ -223,16 +223,6 @@ namespace WebAddressbookTests
                 Email3 = email3,
                 MiddleName = middlename,
                 Nickname = nickname,
-                Bday = bDay,
-                //Bmonth = bMonth,
-                //Byear = bYear,
-                //Aday = aDay,
-                //Amonth = aMonth,
-                //Ayear = aYear,
-                //Birthday = bDay + bMonth + bYear + fullYears,
-                //Anniversary = aDay + aMonth + aYear,
-                SecondaryAddress = address2,
-                SecondaryNotes = notes,
                 Company = company,
                 Title = title,
                 PhoneFax = faxPhone
@@ -242,21 +232,21 @@ namespace WebAddressbookTests
 
 
 
-        public ContactData GetContactInformationFromViewForm(int index)
-        {
-            manager.Navigator.OpenHomePage();
-            InitContactViewForm(index);
+        /*     public ContactData GetContactInformationFromViewForm(int index)
+             {
+                 manager.Navigator.OpenHomePage();
+                 InitContactViewForm(index);
 
-            string content = driver.FindElement(By.XPath("//*[@id='content']")).Text;
-            //string content2 = driver.FindElement(By.XPath("//*[@id='content']")).Text;
+                 string content = driver.FindElement(By.XPath("//*[@id='content']")).Text;
+                 //string content2 = driver.FindElement(By.XPath("//*[@id='content']")).Text;
 
-            //return content;
-            return new ContactData()
-            {
-                DetailedInformation = content
-            };
+                 //return content;
+                 return new ContactData()
+                 {
+                     DetailedInformation = content
+                 };
 
-        }
+             } */
 
 
 
@@ -269,58 +259,79 @@ namespace WebAddressbookTests
         }
 
 
-        public string GetBirthdayFromEditForm(int index)
+        //public string GetBirthdayFromEditForm(int index)
+        //{
+        //    manager.Navigator.OpenHomePage();
+        //    InitContactModification(index);
+
+        //    int currentYear;
+        //    int fullYears;
+        //    string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
+        //    string bmonth = driver.FindElement(By.Name("bmonth")).GetAttribute("value");
+        //    string byear_int = driver.FindElement(By.Name("byear")).GetAttribute("value");
+        //    if (byear_int == null || byear_int == "")
+        //    {
+        //        return "0";
+        //    }
+        //    else
+        //    {
+        //        return byear_int;
+        //    }
+
+        //    currentYear = DateTime.Now.Year;
+        //    fullYears = currentYear - Convert.ToInt32(byear_int);
+
+        //    return "Birthday " + bday + ". " + bmonth + " " + byear_int + " (" + fullYears + ")";
+
+        //}
+
+        public ContactData GetContactInformationFromDetails(int index)
         {
             manager.Navigator.OpenHomePage();
-            InitContactModification(index);
-           
-            int currentYear;
-            int fullYears;
-            string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
-            string bmonth = driver.FindElement(By.Name("bmonth")).GetAttribute("value");
-            string byear_int = driver.FindElement(By.Name("byear")).GetAttribute("value");
-            if (byear_int == null || byear_int =="")
+            InitContactViewDetails(index);
+            String text = driver.FindElement(By.Id("content")).Text;
+            Debug.WriteLine(text);
+            return new ContactData("", "")
             {
-                return "0";
-            }
-            else
-            {
-                return byear_int;
-            }
+                AllInfo = text
+            };
 
-            currentYear = DateTime.Now.Year;
-            fullYears = currentYear - Convert.ToInt32(byear_int);
-
-            return "Birthday " +  bday+". " + bmonth + " " + byear_int + " ("+fullYears+")";
-            
+            throw new NotImplementedException();
+        }
+        private ContactHelper InitContactViewDetails(int v)
+        {
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + (v + 1) + "]//img[@title='Details']")).Click();
+            return this;
         }
 
 
-        public string GetAnniversaryFromEditForm(int index)
-        {
-            manager.Navigator.OpenHomePage();
-            InitContactModification(index);
+        //public string GetAnniversaryFromEditForm(int index)
+        //{
+        //    manager.Navigator.OpenHomePage();
+        //    InitContactModification(index);
 
-            int currentYear;
-            int fullYears;
-            string aday = driver.FindElement(By.Name("aday")).GetAttribute("value");
-            string amonth = driver.FindElement(By.Name("amonth")).GetAttribute("value");
-            string ayear_int = driver.FindElement(By.Name("ayear")).GetAttribute("value");
-            if (ayear_int == null || ayear_int == "")
-            {
-                return "0";
-            }
-            else
-            {
-                return ayear_int;
-            }
+        //    int currentYear;
+        //    int fullYears;
+        //    string aday = driver.FindElement(By.Name("aday")).GetAttribute("value");
+        //    string amonth = driver.FindElement(By.Name("amonth")).GetAttribute("value");
+        //    string ayear_int = driver.FindElement(By.Name("ayear")).GetAttribute("value");
+        //    if (ayear_int == null || ayear_int == "")
+        //    {
+        //        return "0";
+        //    }
+        //    else
+        //    {
+        //        return ayear_int;
+        //    }
 
-            currentYear = DateTime.Now.Year;
-            fullYears = currentYear - Convert.ToInt32(ayear_int);
+        //    currentYear = DateTime.Now.Year;
+        //    fullYears = currentYear - Convert.ToInt32(ayear_int);
 
-            return "Anniversary " + aday + ". " + Char.ToUpper(amonth[0]) + amonth.Substring(1) + " " + ayear_int + " (" + fullYears + ")";
+        //    return "Anniversary " + aday + ". " + Char.ToUpper(amonth[0]) + amonth.Substring(1) + " " + ayear_int + " (" + fullYears + ")";
 
-        }
+        //}
+
+
 
 
     }

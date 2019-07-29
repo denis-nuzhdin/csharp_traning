@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
@@ -23,8 +24,9 @@ namespace WebAddressbookTests
         private string allMailsView;
         private string bYear;
         private int fullBYears;
+        private string allInfo;
 
-        public ContactData(string first_name ,string last_name)
+        public ContactData(string first_name, string last_name)
         {
             FistName = first_name;
             LastName = last_name;
@@ -66,7 +68,7 @@ namespace WebAddressbookTests
         public override string ToString()
         {
 
-            return "lastname = "+LastName+"\nfirstname = " + FistName+ "\nmiddlename = " + MiddleName;
+            return "lastname = " + LastName + "\nfirstname = " + FistName + "\nmiddlename = " + MiddleName;
 
             //return FIO;
             //return "fio=" + LastName + FistName;
@@ -92,7 +94,7 @@ namespace WebAddressbookTests
         }
 
 
-        public string FistName { get; set;}
+        public string FistName { get; set; }
 
         public string MiddleName { get; set; }
 
@@ -117,72 +119,39 @@ namespace WebAddressbookTests
             {
                 address = value;
             }
-                
+
         }
 
-        //public string Nickname { get; set; }
-        public string Nickname
-        {
-            get
+        public string Nickname { get; set; }
+        /*    public string Nickname
             {
-                if (nickname != null || nickname=="")
+                get
                 {
-                    return nickname + stringRN;
+                    if (nickname != null || nickname == "")
+                    {
+                        return nickname + stringRN;
+                    }
+                    else
+                    {
+                        return nickname + stringRN;
+                    }
                 }
-                else
-                {
-                    return nickname + stringRN;
-                }
-            }
- 
 
-            set
-            {
-                nickname = value;
+
+                set
+                {
+                    nickname = value;
+                }
             }
-        }
+            */
 
 
 
         public string Photo { get; set; }
 
-        public string Title
-        {
-            get
-            {
-                if (title != null || title == "")
-                {
-                    return fromatRNforString(title);
-                }
-                else return fromatRNforString(title);
+        public string Title { get; set; }
 
-            }
-
-            set
-            {
-                title = value;
-            }
-                
-        }
-
-        public string Company
-        {
-            get
-            {
-                if (company != null || company == "")
-                {
-                    return fromatRNforString(company);
-                }
-                else return fromatRNforString(company);
-
-            }
-
-            set
-            {
-                company = value;
-            }
-        }
-
+        public string Company { get; set; }
         public string PhoneHome { get; set; }
 
         public string PhoneMobile { get; set; }
@@ -211,7 +180,7 @@ namespace WebAddressbookTests
 
         private string CleanUp(string phone)
         {
-            if (phone == null || phone=="")
+            if (phone == null || phone == "")
             {
                 return "";
             }
@@ -236,7 +205,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CheckEmails(Email1) + CheckEmails(Email2) +CheckEmails(Email3)).Trim();
+                    return (CheckEmails(Email1) + CheckEmails(Email2) + CheckEmails(Email3)).Trim();
                 }
 
             }
@@ -276,60 +245,7 @@ namespace WebAddressbookTests
             }
         }
 
-        public string Birthday { get; set; }
-        public string Bday { get; set; }
-        public string Bmonth { get; set; }
-        public string Byear
-        { get
-            {
-                if (bYear != null)
-                {
-                    return bYear;
-                }
-                else
-                {
-                    return bYear;
-                }
-            }
 
-            set 
-            {
-                bYear = value;
-            }
-        }
-
-        public string Anniversary { get; set; }
-
-        //public string FullBYear
-        //{
-        //    get
-        //    {
-        //        int currentYear;
-        //        currentYear = Convert.ToInt32(DateTime.Now.Year);
-              
-        //        if (Byear == null)
-        //        {
-        //            return "";
-        //        }
-        //        else
-        //        {
-        //           //return currentYear;
-        //            fullBYears = currentYear - Convert.ToInt32(bYear);
-        //            return fullBYears;
-        //        }
-
-        //    }
-
-        //    set
-        //    {
-        //        fullBYears = value;
-        //    }
-
-        //}
-
-        public string Aday { get; set; }
-        public string Amonth { get; set; }
-        public string Ayear { get; set; }
 
         public string Group { get; set; }
 
@@ -340,49 +256,49 @@ namespace WebAddressbookTests
         public string SecondaryNotes { get; set; }
 
 
-        public string DetailedInformation
-        {
-            get
-            {
-                if (detailedInformation != null)
-                {
-                    return detailedInformation;
-                }
-                else
-                {
-                    return (GetFIOFromView + Nickname + Title + Company + Address + GetPhonesFromView + 
-                        GetMailsFromView + GetHomepageFromView + fromatRNforString(Birthday) + fromatRNforString(Anniversary) +stringRN 
-                        + fromatRNforString(SecondaryAddress)+ stringRN + SecondaryNotes).Trim();
+        /*      public string DetailedInformation
+              {
+                  get
+                  {
+                      if (detailedInformation != null)
+                      {
+                          return detailedInformation;
+                      }
+                      else
+                      {
+                          return (GetFIOFromView + Nickname + Title + Company + Address + GetPhonesFromView +
+                              GetMailsFromView + GetHomepageFromView + fromatRNforString(Birthday) + fromatRNforString(Anniversary) + stringRN
+                              + fromatRNforString(SecondaryAddress) + stringRN + SecondaryNotes).Trim();
 
-                }
-            }
+                      }
+                  }
 
-            set
-            {
-                detailedInformation = value;
-            }
-        }
+                  set
+                  {
+                      detailedInformation = value;
+                  }
+              } 
 
 
-        public string GetFIOFromView
-        {
-            get
-            {
-                if (allFIO != null)
-                {
-                    return allFIO;
-                }
-                else
-                {
-                    return FistName + " " + MiddleName + " " + LastName + stringRN;
-                }
-            }
+              public string GetFIOFromView
+              {
+                  get
+                  {
+                      if (allFIO != null)
+                      {
+                          return allFIO;
+                      }
+                      else
+                      {
+                          return FistName + " " + MiddleName + " " + LastName + stringRN;
+                      }
+                  }
 
-            set
-            {
-                allFIO = value;
-            }
-        }
+                  set
+                  {
+                      allFIO = value;
+                  }
+              } */
 
 
 
@@ -391,14 +307,14 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (allPhonesView == null || allPhones =="")
+                if (allPhonesView == null || allPhones == "")
                 {
                     return "";
                 }
                 else
                 {
-                    return fromatRNforString("H: " + PhoneHome + stringRN + "M: " + 
-                        PhoneMobile + stringRN + "W: " + PhoneWork + stringRN + "F: "+PhoneFax) + stringRN;
+                    return fromatRNforString("H: " + PhoneHome + stringRN + "M: " +
+                        PhoneMobile + stringRN + "W: " + PhoneWork + stringRN + "F: " + PhoneFax) + stringRN;
                 }
 
             }
@@ -415,7 +331,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (allMailsView == null || allMailsView =="")
+                if (allMailsView == null || allMailsView == "")
                 {
                     return "";
                 }
@@ -445,7 +361,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return fromatRNforString("Homepage:"+ stringRN + Homepage) + stringRN;
+                    return fromatRNforString("Homepage:" + stringRN + Homepage) + stringRN;
                 }
 
             }
@@ -455,6 +371,116 @@ namespace WebAddressbookTests
                 allPhonesView = value;
             }
 
+        }
+
+        private string CheckNotNull(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone + "\r\n";
+        }
+
+        private string CheckHomePhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return "H: " + phone + "\r\n";
+        }
+
+        private string CheckWorkPhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return "W: " + phone + "\r\n";
+        }
+
+        private string CheckMobilePhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return "M: " + phone + "\r\n";
+        }
+
+        private string CheckFaxPhone(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return "F: " + phone + "\r\n";
+        }
+
+        private string CheckHomepage(string page)
+        {
+            if (page == null || page == "")
+            {
+                return "";
+            }
+            return "Homepage:\r\n" + Regex.Replace(page, "http://", "") + "\r\n";
+        }
+
+        private string CheckName(string name)
+        {
+            if (name == null || name == "")
+            {
+                return "";
+            }
+            return name + " ";
+        }
+
+        public static string ReplaceLastOccurrence(string Source, string Find, string Replace)
+        {
+            if (Source == null || Source == "")
+            {
+                return "";
+            }
+            else
+            {
+                int place = Source.LastIndexOf(Find);
+
+                if (place == -1)
+                {
+                    return Source;
+                }
+
+                string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+                return result;
+
+            }
+        }
+
+        public string AllInfo
+        {
+            get
+            {
+                if (allInfo != null)
+                {
+                    return allInfo;
+                }
+                else
+                {
+                    string res = CheckNotNull(CheckName(FistName) + CheckName(MiddleName)
+                        + CheckNotNull(LastName) + CheckNotNull(Nickname) + CheckNotNull(Title) + CheckNotNull(Company) + CheckNotNull(Address))
+
+                        + CheckNotNull(CheckHomePhone(PhoneHome) + CheckMobilePhone(PhoneMobile) + CheckWorkPhone(PhoneWork) + CheckFaxPhone(PhoneFax))
+
+                       + CheckNotNull(Email1) + CheckNotNull(Email2) + CheckNotNull(Email3) + CheckHomepage(Homepage);
+
+                    return ReplaceLastOccurrence(res, "\r\n", "");
+                }
+            }
+            set
+            {
+                allInfo = value;
+            }
         }
 
 
